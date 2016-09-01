@@ -27,12 +27,12 @@
 
                     var offset = new Date().getTimezoneOffset() / 60;
 
-                    var start = new Date("2016-09-02T09:00:00");
+                    var start = new Date();
                     start.setHours(0);
                     start.setMinutes(0);
                     start.setMilliseconds(0);
 
-                    var end = new Date("2016-09-02T09:00:00");
+                    var end = new Date();
                     end.setHours(23);
                     end.setMinutes(59);
                     end.setMilliseconds(0);

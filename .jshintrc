@@ -1,0 +1,19 @@
+{
+  "globals"   : {
+
+  },
+  "camelcase": false,
+  "curly": false,
+  "eqeqeq": true,
+  "freeze": true,
+  "indent": 2,
+  "latedef": true,
+  "laxcomma": true,
+  "node": true,
+  "esnext": true,
+  "trailing": true,
+  "strict": true,
+  "unused": "vars",
+  "undef": true,
+  "asi": true
+}

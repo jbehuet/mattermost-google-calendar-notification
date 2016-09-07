@@ -4,9 +4,7 @@
   "description": "",
   "author": "Jerome BEHUET",
   "license": "MIT",
-  "main": "/bin/notify.js",
-  "scripts": {
-  },
+  "main": "notify.js",
   "dependencies": {
     "ical": "^0.5.0",
     "pad": "^1.0.0"

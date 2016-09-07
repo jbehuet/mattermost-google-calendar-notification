@@ -4,9 +4,7 @@
     var config = require('./config.js'),
         pad = require('pad'),
         ical = require('ical'),
-        http = require('http'),
-        https = require('https'),
-        auth = require('basic-auth');
+        https = require('https');
 
     config.calendars.map(function(calendar) {
 
@@ -90,39 +88,5 @@
             }
         });
     })
-
-
-    //We need a function which handles requests and send response
-    function handleRequest(request, response) {
-        var credentials = auth(request)
-
-        if (!credentials || credentials.name !== config.access.username || credentials.pass !== config.access.password) {
-            response.statusCode = 401
-            response.setHeader('WWW-Authenticate', 'Basic realm="example"')
-            response.end('Access denied')
-        } else {
-            var res = "";
-            config.calendars.forEach(function(calendar) {
-                res += calendar.ical + " : ";
-                if (calendar.hasOwnProperty('success')) {
-                    res += (calendar.success ? "OK" : "KO");
-                } else {
-                    res += "-";
-                }
-
-            });
-            response.end('Cron schedule ' + config.cron + '\n' + res);
-        }
-
-    }
-
-    //Create a server
-    var server = http.createServer(handleRequest);
-
-    //Lets start our server
-    server.listen(config.port, function() {
-        //Callback triggered when server is successfully listening. Hurray!
-        console.log("Server listening on: http://localhost:%s", config.port);
-    });
 
 })()

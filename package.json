@@ -9,7 +9,6 @@
     "start": "node notify.js"
   },
   "dependencies": {
-    "basic-auth": "^1.0.4",
     "ical": "^0.5.0",
     "pad": "^1.0.0"
   }

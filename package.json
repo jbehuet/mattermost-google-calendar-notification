@@ -7,6 +7,7 @@
   "main": "notify.js",
   "dependencies": {
     "ical": "^0.5.0",
-    "pad": "^1.0.0"
+    "pad": "^1.0.0",
+    "q": "^1.4.1"
   }
 }

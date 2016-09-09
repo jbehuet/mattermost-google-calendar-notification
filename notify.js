@@ -6,6 +6,7 @@
         pad = require('pad'),
         ical = require('ical'),
         https = require('https'),
+        Moment = require('moment-timezone'),
         Q = require('q');
 
     function readCalendar(calendar) {
@@ -17,14 +18,12 @@
                 deferred.reject(err);
             } else {
 
-                var offset = new Date().getTimezoneOffset() / 60;
-
-                var start = new Date();
+                var start = new Date(Moment().tz('Europe/Paris').format());
                 start.setHours(0);
                 start.setMinutes(0);
                 start.setMilliseconds(0);
 
-                var end = new Date();
+                var end = new Date(Moment().tz('Europe/Paris').format());
                 end.setHours(23);
                 end.setMinutes(59);
                 end.setMilliseconds(0);
@@ -35,11 +34,11 @@
                     if (data.hasOwnProperty(k)) {
                         var ev = data[k];
                         ev.dateStart = new Date(ev.start);
-                        ev.dateStart.setHours(ev.dateStart.getHours() + Math.abs(offset));
+                        ev.dateStart.setHours(ev.dateStart.getHours()); //+ Math.abs(offset));
                         ev.dateStart.setMilliseconds(0);
 
                         ev.dateEnd = new Date(ev.end);
-                        ev.dateEnd.setHours(ev.dateEnd.getHours() + Math.abs(offset));
+                        ev.dateEnd.setHours(ev.dateEnd.getHours()); // + Math.abs(offset));
                         ev.dateEnd.setMilliseconds(0);
 
                         ev.start = new Date(ev.start);

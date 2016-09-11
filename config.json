@@ -1,0 +1,14 @@
+{
+    "webhook_host": "mattermost-domaine.ext",
+    "webhook_port": 80,
+    "icon_url": "https://upload.wikimedia.org/wikipedia/en/f/f1/Google_Calendar_Logo.png",
+    "message_title": "## Today\n",
+    "default_message": "### Nothing",
+    "calendars": [{
+        "name":"Sample",
+        "webhook_path": "/hooks/to_be_created_on_mattermost",
+        "ical": "fr.french%23holiday%40group.v.calendar.google.com"
+    }
+  ]
+
+}

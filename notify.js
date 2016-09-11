@@ -13,6 +13,7 @@
         var deferred = Q.defer();
 
         ical.fromURL('https://calendar.google.com/calendar/ical/' + calendar.ical + '/public/basic.ics', {}, function(err, data) {
+            console.log(data)
             calendar.success = (!err);
             if (err) {
                 deferred.reject(err);

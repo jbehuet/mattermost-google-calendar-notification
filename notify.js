@@ -73,7 +73,7 @@
         var body = {};
         body.username = "Calendar";
         body.icon_url = config.icon_url;
-        body.text = config.message_title + (calendar.messages || "Quêtes et/ou Projet");
+        body.text = config.message_title + (calendar.messages || calendar.default_message);
 
         if (process.env.ENV !== 'DEV') {
             var req = https.request(options, function(res) {

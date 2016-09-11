@@ -2,7 +2,7 @@
 
 (function() {
     'use strict';
-    var config = require('./config.js'),
+    var config = require('./config.json'),
         pad = require('pad'),
         ical = require('ical'),
         https = require('https'),
@@ -18,12 +18,12 @@
                 deferred.reject(err);
             } else {
 
-                var start = new Date(Moment().tz('Europe/Paris').format());
+                var start = new Date();
                 start.setHours(0);
                 start.setMinutes(0);
                 start.setMilliseconds(0);
 
-                var end = new Date(Moment().tz('Europe/Paris').format());
+                var end = new Date();
                 end.setHours(23);
                 end.setMinutes(59);
                 end.setMilliseconds(0);
@@ -33,18 +33,13 @@
                 for (var k in data) {
                     if (data.hasOwnProperty(k)) {
                         var ev = data[k];
-                        ev.dateStart = new Date(ev.start);
-                        ev.dateStart.setHours(ev.dateStart.getHours());
-                        ev.dateStart.setMilliseconds(0);
-
-                        ev.dateEnd = new Date(ev.end);
-                        ev.dateEnd.setHours(ev.dateEnd.getHours());
-                        ev.dateEnd.setMilliseconds(0);
 
                         ev.start = new Date(ev.start);
                         ev.end = new Date(ev.end)
 
-                        if (ev.dateStart >= start && ev.dateStart <= end) {
+                        if (ev.start >= start && ev.end <= end) {
+                            ev.start = new Date(Moment(ev.start).tz('Europe/Paris').format());
+                            ev.end = new Date(Moment(ev.end).tz('Europe/Paris').format());
                             calendar.messages += "### De " + ev.start.getHours() + ":" + pad(2, ev.start.getMinutes(), "0") + " à " + ev.end.getHours() + ":" + pad(2, ev.end.getMinutes(), "0") + " : " + ev.summary + "\n";
                         }
 

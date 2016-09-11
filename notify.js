@@ -34,11 +34,11 @@
                     if (data.hasOwnProperty(k)) {
                         var ev = data[k];
                         ev.dateStart = new Date(ev.start);
-                        ev.dateStart.setHours(ev.dateStart.getHours()); //+ Math.abs(offset));
+                        ev.dateStart.setHours(ev.dateStart.getHours());
                         ev.dateStart.setMilliseconds(0);
 
                         ev.dateEnd = new Date(ev.end);
-                        ev.dateEnd.setHours(ev.dateEnd.getHours()); // + Math.abs(offset));
+                        ev.dateEnd.setHours(ev.dateEnd.getHours());
                         ev.dateEnd.setMilliseconds(0);
 
                         ev.start = new Date(ev.start);
@@ -73,7 +73,7 @@
         var body = {};
         body.username = "Calendar";
         body.icon_url = config.icon_url;
-        body.text = config.message_title + (calendar.messages || calendar.default_message);
+        body.text = config.message_title + (calendar.messages || config.default_message);
 
         if (process.env.ENV !== 'DEV') {
             var req = https.request(options, function(res) {

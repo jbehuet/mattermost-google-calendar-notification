@@ -18,12 +18,12 @@
                 deferred.reject(err);
             } else {
 
-                var start = new Date(Moment.tz('Europe/Paris').format());
+                var start = new Date();
                 start.setHours(0);
                 start.setMinutes(0);
                 start.setMilliseconds(0);
 
-                var end = new Date(Moment.tz('Europe/Paris').format());
+                var end = new Date();
                 end.setHours(23);
                 end.setMinutes(59);
                 end.setMilliseconds(0);
@@ -34,12 +34,10 @@
                     if (data.hasOwnProperty(k)) {
                         var ev = data[k];
 
-                        ev.start = new Date(Moment.tz(ev.start, 'Europe/Paris').format());
-                        ev.end = new Date(Moment.tz(ev.end, 'Europe/Paris').format());
+                        ev.start = Moment.tz(new Date(ev.start).toString(), 'Europe/Paris').toDate();
+                        ev.end = Moment.tz(new Date(ev.end).toString(), 'Europe/Paris').toDate();
 
                         if (ev.start >= start && ev.end <= end) {
-                            //ev.start = new Date(Moment.tz(ev.start, 'America/Los_Angeles').format());
-                            //ev.end = new Date(Moment(ev.end).tz('Europe/Paris').format());
                             calendar.messages += "### De " + ev.start.getHours() + ":" + pad(2, ev.start.getMinutes(), "0") + " à " + ev.end.getHours() + ":" + pad(2, ev.end.getMinutes(), "0") + " : " + ev.summary + "\n";
                         }
 
@@ -68,7 +66,7 @@
         var body = {};
         body.username = "Calendar";
         body.icon_url = config.icon_url;
-        body.text = config.message_title + (calendar.messages || config.default_message);
+        body.text = config.message_title + (calendar.messages ||  config.default_message);
 
         if (process.env.ENV !== 'DEV') {
             var req = https.request(options, function(res) {

@@ -13,18 +13,17 @@
         var deferred = Q.defer();
 
         ical.fromURL('https://calendar.google.com/calendar/ical/' + calendar.ical + '/public/basic.ics', {}, function(err, data) {
-            console.log(data)
             calendar.success = (!err);
             if (err) {
                 deferred.reject(err);
             } else {
 
-                var start = new Date();
+                var start = new Date(Moment.tz('Europe/Paris').format());
                 start.setHours(0);
                 start.setMinutes(0);
                 start.setMilliseconds(0);
 
-                var end = new Date();
+                var end = new Date(Moment.tz('Europe/Paris').format());
                 end.setHours(23);
                 end.setMinutes(59);
                 end.setMilliseconds(0);
@@ -35,12 +34,12 @@
                     if (data.hasOwnProperty(k)) {
                         var ev = data[k];
 
-                        ev.start = new Date(ev.start);
-                        ev.end = new Date(ev.end)
+                        ev.start = new Date(Moment.tz(ev.start, 'Europe/Paris').format());
+                        ev.end = new Date(Moment.tz(ev.end, 'Europe/Paris').format());
 
                         if (ev.start >= start && ev.end <= end) {
-                            ev.start = new Date(Moment(ev.start).tz('Europe/Paris').format());
-                            ev.end = new Date(Moment(ev.end).tz('Europe/Paris').format());
+                            //ev.start = new Date(Moment.tz(ev.start, 'America/Los_Angeles').format());
+                            //ev.end = new Date(Moment(ev.end).tz('Europe/Paris').format());
                             calendar.messages += "### De " + ev.start.getHours() + ":" + pad(2, ev.start.getMinutes(), "0") + " à " + ev.end.getHours() + ":" + pad(2, ev.end.getMinutes(), "0") + " : " + ev.summary + "\n";
                         }
 

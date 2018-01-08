@@ -5,6 +5,9 @@
   "author": "Jerome BEHUET",
   "license": "MIT",
   "main": "notify.js",
+  "scripts":{
+    "start": "node notify.js"
+  },
   "dependencies": {
     "ical": "^0.5.0",
     "moment-timezone": "^0.5.5",
